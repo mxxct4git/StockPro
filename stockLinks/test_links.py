@@ -21,8 +21,12 @@ pro = ts.pro_api("9da1aed5b1e4b7a0e022279a8b78e17f7cccf51e4900fb9e95678222")
 # 获取各大交易所交易日历数据， 默认提取的是上交所
 # exchange: SSE上交所 SZSE深交所
 # b = pro.trade_cal(exchange='', start_date='20190411', end_date='20190502')
-# b = pro.query('trade_cal', exchange='', start_date='20190411', end_date='20190502')
-# print(b)
+b = pro.query('trade_cal', exchange='', start_date='20190327', end_date='20190505', fields='exchange,cal_date,is_open,pretrade_date')
+data = b['data']
+columns = data['fields']
+items = data['items']
+res = pd.DataFrame(items, columns=columns)
+print(res)
 
 # 上市公司基本信息接口
 # exchange: SSE上交所 SZSE深交所
@@ -79,3 +83,11 @@ pro = ts.pro_api("9da1aed5b1e4b7a0e022279a8b78e17f7cccf51e4900fb9e95678222")
 # print(res)
 
 # 个股资金流向接口
+# 需要积分1500以上
+# 获取沪深A股票资金流向数据，分析大单小单成交情况，用于判别资金动向
+# j = pro.query('moneyflow', ts_code='002493.SZ', start_date='20190415', end_date='2019025')
+# print(j['code'])
+
+# 利润表接口
+# l = pro.query('income',ts_code='002493.SH', start_date='20190401', end_date='20190430', fields='ts_code,ann_date,f_ann_date,end_date,report_type,comp_type,basic_eps,diluted_eps')
+# print(l['code'])
