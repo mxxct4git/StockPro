@@ -21,12 +21,12 @@ pro = ts.pro_api("9da1aed5b1e4b7a0e022279a8b78e17f7cccf51e4900fb9e95678222")
 # 获取各大交易所交易日历数据， 默认提取的是上交所
 # exchange: SSE上交所 SZSE深交所
 # b = pro.trade_cal(exchange='', start_date='20190411', end_date='20190502')
-b = pro.query('trade_cal', exchange='', start_date='20190327', end_date='20190505', fields='exchange,cal_date,is_open,pretrade_date')
-data = b['data']
-columns = data['fields']
-items = data['items']
-res = pd.DataFrame(items, columns=columns)
-print(res)
+# b = pro.query('trade_cal', exchange='', start_date='20190101', end_date='20190501', fields='exchange,cal_date,is_open,pretrade_date')
+# data = b['data']
+# columns = data['fields']
+# items = data['items']
+# res = pd.DataFrame(items, columns=columns)
+# print(res)
 
 # 上市公司基本信息接口
 # exchange: SSE上交所 SZSE深交所
