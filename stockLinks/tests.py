@@ -9,7 +9,6 @@ import pandas as pd
 import time
 from django.http import HttpResponse
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 from stockDataBase.models import Stock_Basic_Trade_Cal as basic_trade_cal
 
 engine = create_engine('mysql+pymysql://root:123456@localhost:3306/stockpro?charset=utf8')

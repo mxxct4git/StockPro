@@ -16,9 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
+from django.views.generic.base import RedirectView
+from django.contrib.staticfiles.views import serve
 
 urlpatterns = {
     path('admin/', admin.site.urls),
+    # path(r'panda.ico', RedirectView.as_view(url=r'/static/img/panda.ico')),
+    # url(r'^panda.ico$', RedirectView.as_view(url=r'static/img/panda.ico')),  # 网站图标
+    # path('panda.ico', serve, {'path': './../static/img/panda.ico'}),
+
     # http://127.0.0.1:8000/stockLinks/hello/
     # http://127.0.0.1:8000/stockLinks 是找到对应的APP
     # http://127.0.0.1:8000/stockLinks/hello/ 是找到对应的APP下的urlpatterns,从而找到对应的views
