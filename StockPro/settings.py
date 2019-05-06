@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_crontab',
     'stockLinks',
     'stockPages',
     'stockDataBase',
@@ -138,3 +139,11 @@ STATICFILES_DIRS = (
     os.path.join(os.path.dirname(__file__), './../static/').replace('\\', '/'),
 )
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.qq.com'  # 如果是 163 改成 smtp.163.com
+EMAIL_PORT = 465
+EMAIL_HOST_USER = '386965035@qq.com'
+EMAIL_HOST_PASSWORD = 'cdqbohvhkwydcadh'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

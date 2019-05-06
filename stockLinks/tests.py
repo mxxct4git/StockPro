@@ -6,7 +6,9 @@ from django.test import TestCase
 
 import tushare as ts
 import pandas as pd
-import time
+from django.core.mail import send_mail, send_mass_mail
+from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponse
 from sqlalchemy import create_engine
 from stockDataBase.models import Stock_Basic_Trade_Cal as basic_trade_cal
@@ -59,3 +61,31 @@ def operate_datebase(request):
 
     return HttpResponse("测试数据库成功")
 
+
+def send_email(request):
+    # 一个收件人
+    # send_mail('test_03', '发送第3个测试邮件', 'mxxct <386965035@qq.com>',
+    #           ['liufangtong@enn.cn'], fail_silently=False)
+
+    # 多个收件人
+    # message1 = ('Subject here', 'Here is the message', 'from@example.com', ['first@example.com', 'other@example.com'])
+    # message2 = ('Another Subject', 'Here is another message', 'from@example.com', ['second@test.com'])
+    # send_mass_mail((message1, message2), fail_silently=False)
+
+    # send_mail 每次发邮件都会建立一个连接，发多封邮件时建立多个连接。而 send_mass_mail 是建立单个连接发送多封邮件，所以一次性发送多封邮件时 send_mass_mail 要优于 send_mail
+
+    # 发送带附件的 html 格式的内容
+    from_email = settings.DEFAULT_FROM_EMAIL
+    # subject 主题 content 内容 to_addr 是一个列表，发送给哪些人
+    msg = EmailMultiAlternatives("test_1423","测试html格式邮件",from_email, ['liufangtong@enn.cn','zhangjiahaoa@enn.cn'])
+
+    msg.content_subtype = 'html'
+
+    # 添加附件
+    # msg.attach_file('./static/img/panda.ico')
+    msg.attach_file('G:/工作/新奥/文件/大数据赋能群汇总文件/考勤汇总/出差.txt')
+
+    # 发送
+    msg.send()
+
+    return HttpResponse("测试发送邮件")

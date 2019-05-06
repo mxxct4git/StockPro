@@ -51,7 +51,15 @@ print((datetime.datetime.now() + datetime.timedelta(days=7)).strftime('%Y%m%d'))
 
 # 股票列表接口
 # 查询当前所有正常上市交易的股票列表，获取基础信息数据，包括股票代码、名称、上市日期、退市日期等
-# a = pro.query('stock_basic', exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+# ts_code,symbol,name,area,induy,fullname,enname,market,exchange,curr_type,list_status,list_date,delist_date,is_hs
+# a = pro.query('stock_basic', exchange='', list_status='', fields='ts_code,symbol,name,area,induy,fullname,enname,market,exchange,curr_type,list_status,list_date,delist_date,is_hs')
+# a = pro.query('stock_basic', exchange='SSE', list_status='P', fields='ts_code,symbol,name,area,industry,list_date')
+# print(len(a['data']['items']))
+# data = a['data']
+# columns = data['fields']
+# items = data['items']
+# res = pd.DataFrame(items, columns=columns)
+# print(res)
 # print(a)
 
 # 交易日历接口
@@ -67,9 +75,10 @@ print((datetime.datetime.now() + datetime.timedelta(days=7)).strftime('%Y%m%d'))
 
 # 上市公司基本信息接口
 # exchange: SSE上交所 SZSE深交所
+# ts_code,exchange,chairman,manager,secretary,reg_capital,setup_date,province,city,introduction,website,email,office,employees,main_business,business_scope
 # c = pro.stock_company(exchange='SZSE', fields='ts_code,chairman,manager,secretary,reg_capital,setup_date,province')
-# c = pro.query('stock_company', exchange='SZSE', fields='ts_code,chairman,manager,secretary,reg_capital,setup_date,province')
-# print(c)
+# c = pro.query('stock_company', exchange='SSE', fields='ts_code,chairman,manager,secretary,reg_capital,setup_date,province')
+# print(len(c['data']['items']))
 
 # IPO新股列表接口
 # d = pro.new_share(start_date='20190401', end_date='20190501')

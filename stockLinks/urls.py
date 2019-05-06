@@ -11,4 +11,5 @@ urlpatterns = [
     url('hello/', views.hello),
     url('test_db/', tests.test_db),
     url('operate_db/', tests.operate_datebase),
+    url('send_email/', tests.send_email),
 ]
