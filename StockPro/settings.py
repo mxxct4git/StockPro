@@ -53,6 +53,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# 配置可启动的服务器地址
+DEBUG = True
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.2.152.222']
+
 APPEND_SLASH = False
 
 ROOT_URLCONF = 'StockPro.urls'
