@@ -39,15 +39,15 @@ pro = ts.pro_api("9da1aed5b1e4b7a0e022279a8b78e17f7cccf51e4900fb9e95678222")
 # %Z 当前时区的名称
 # %% %号本身
 
-print(time.localtime())
-print(time.time())
-print(time.strftime('%Y%m%d', time.localtime()))
+# print(time.localtime())
+# print(time.time())
+# print(time.strftime('%Y%m%d', time.localtime()))
 #  因为需要对时间进行加减，所以使用 datetime 包
-print(datetime.datetime.now())
+# print(datetime.datetime.now())
 # 格式化的方式和 time 包的方式一致
-print(datetime.datetime.now().strftime('%Y%m%d'))
+# print(datetime.datetime.now().strftime('%Y%m%d'))
 # 加减法使用 timedelta
-print((datetime.datetime.now() + datetime.timedelta(days=7)).strftime('%Y%m%d'))
+# print((datetime.datetime.now() + datetime.timedelta(days=7)).strftime('%Y%m%d'))
 
 # 股票列表接口
 # 查询当前所有正常上市交易的股票列表，获取基础信息数据，包括股票代码、名称、上市日期、退市日期等
@@ -137,3 +137,21 @@ print((datetime.datetime.now() + datetime.timedelta(days=7)).strftime('%Y%m%d'))
 # 利润表接口
 # l = pro.query('income',ts_code='002493.SH', start_date='20190401', end_date='20190430', fields='ts_code,ann_date,f_ann_date,end_date,report_type,comp_type,basic_eps,diluted_eps')
 # print(l['code'])
+
+# 指数接口
+m = ts.get_index()
+print(m)
+vSZ_index_open = m['open'][0]  # 开盘点位
+vSZ_index_change = m['change'][0]  # 涨跌幅
+vSZ_index_preclose = m['preclose'][0]  # 昨日收盘点位
+vSZ_index_now = m['close'][0]  # 收盘点位（即时点位）
+vSZ_index_high = m['high'][0]  # 最高位
+vSZ_index_low = m['low'][0]  # 最低位
+vSZ_index_volume = m['volume'][0]  # 成交量（手）
+vSZ_index_volume = int(vSZ_index_volume)
+vSZ_index_amount = m['amount'][0]  # 成交金额（亿元）
+vSZ_index_amount = float(vSZ_index_amount)
+# print(vSZ_index_volume)
+# print(vSZ_index_amount)
+
+# print(m['code'])

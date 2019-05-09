@@ -11,14 +11,14 @@ import stockDataBase.models as models
 
 @csrf_exempt
 def login(request):
-    print(request)
+    # print(request)
     vUsername = request.POST['username']
     vPassword = request.POST['password']
     res = models.Stock_Basic_User.objects.filter(username=vUsername, password=vPassword)\
         .values('id', 'username', 'password', 'truename', 'email', 'authority', 'deleted')  # QuerySet 类型
 
     df = pd.DataFrame(list(res))
-    print(df)
+    # print(df)
     vTruename = df['truename'][0]
     vAuthority = df['authority'][0]
     vUserId = df['id'][0]
@@ -34,13 +34,13 @@ def login(request):
     # 删除 session
     # del request.session[key]  # 不存在时报错
     tmp = request.session.get(session_user_info_key, default=None)  # str 类型
-    print(tmp)
-    print(type(tmp))
+    # print(tmp)
+    # print(type(tmp))
     even = json.loads(tmp)  # list 类型
-    print(type(even))
-    print(even[0])
-    print(even[0]['fields'])
-    print(even[0]['fields']['truename'])
+    # print(type(even))
+    # print(even[0])
+    # print(even[0]['fields'])
+    # print(even[0]['fields']['truename'])
     # print(even)
     # print(even[0])
     # print(even[1])
