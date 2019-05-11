@@ -352,7 +352,7 @@
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="active treeview menu-open">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>综合指标</span>
             <span class="pull-right-container">
@@ -360,10 +360,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="/stockLinks/to_login/id_{{ userId }}"><i class="fa fa-circle-o"></i> 综合指标</a></li>
+            <li><a href="/stockLinks/to_login/id_{{ userId }}"><i class="fa fa-circle-o"></i> 综合指标</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <li class="active treeview menu-open">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>自选股</span>
@@ -372,7 +372,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> 管理</a></li>
+            <li class="active"><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> 管理</a></li>
             <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 详情</a></li>
           </ul>
         </li>
@@ -517,13 +517,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        综合指标
+        自选股管理
         <small>Version 2.0</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"> 首页</a></li>
-          <li><a href="#"> 综合指标</a></li>
-        <li class="active"><i class="fa fa-dashboard"></i> 综合指标</li>
+          <li><a href="#"> 自选股</a></li>
+        <li class="active"><i class="fa fa-dashboard"></i> 自选股管理</li>
       </ol>
     </section>
 
@@ -823,6 +823,39 @@
             </div>
             <!-- /.box-footer -->
           </div>
+            <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">自选股</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+                <div class="box-body">
+                    <form action="/stockLinks/add_self_select/" method="post">
+                        {% csrf_token %}
+                    <div class="form-group">
+                        <select class="form-control select2" multiple="multiple" data-placeholder="选择股票"
+                                style="width: 70%;" id="choose_self_select" name="self_sel">
+                          <option>Alabama</option>
+                          <option>Alaska</option>
+                          <option>California</option>
+                          <option>Delaware</option>
+                          <option>Tennessee</option>
+                          <option>Texas</option>
+                          <option>Washington</option>
+                        </select>
+                        <input class="btn btn-primary" style="margin-left: 10%" type="submit" value="添加"/>
+                    </div>
+                    </form>
+                <!-- /.box-body -->
+              </div>
+          <!-- /.box -->
+        </div>
+
         <!-- /.col -->
         </div>
         <div class="col-md-4">
@@ -972,6 +1005,26 @@
     $(function () {
        $('.select2').select2()
     });
+
+    $.ajax({
+        url:"/stockPages/get_self_manage/",
+        type: "post",
+        data:{},
+        dataType:'json',
+        success:function (data) {
+            // 转换成 json
+            var res = $.parseJSON(data);
+            console.log(res[0]);
+            console.log(res[0]["id"]);
+            console.log(res.length);
+            var sel = document.getElementById("choose_self_select");
+            sel.options.length = 0;
+            for(var i = 0; i < res.length; i++){
+                sel.add(new Option(res[i]["symbol"] + '_' + res[i]["name"],res[i]["id"]))
+            }
+        }
+    });
+/*
     $.ajax({
         url:"/stockPages/get_stock_index/",
         type:"post",
@@ -1029,10 +1082,14 @@
             }
         }
     }); // Ajax End
+
+ */
 </script>
+
 <script type="text/javascript">
     // 设置定时任务 只有当周一到周五 9点半--11点 13点半--15点的时候每10秒刷新数据
     // 后期改进：需要判断当前年月日是否休市
+    /*
     setInterval(function () {
         var vDate = new Date();
         var h = vDate.getHours() > 9 ? vDate.getHours() : '0' + vDate.getHours();
@@ -1100,6 +1157,8 @@
             })
         }
     }, 10000);
+
+     */
 </script>
 </body>
 </html>
